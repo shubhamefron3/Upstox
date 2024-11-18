@@ -35,8 +35,11 @@ extension HomePageViewController : HomePageViewModelOutputProtocol {
             self?.spinner.stopAnimating()
             self?.setupBarValues()
             self?.stockHoldingTableView.reloadData()
-            
         }
+    }
+    
+    func failure() {
+        self.spinner.stopAnimating()
     }
 }
 

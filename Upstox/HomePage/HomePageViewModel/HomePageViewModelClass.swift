@@ -13,6 +13,7 @@ protocol HomePageViewModelInputProtocol: AnyObject {
 
 protocol HomePageViewModelOutputProtocol: AnyObject {
     func tableViewReload()
+    func failure()
 }
 
 protocol HomePageViewModelTypeProtocol: AnyObject {
@@ -47,7 +48,7 @@ final class HomePageViewModelClass: HomePageViewModelInputProtocol,HomePageViewM
                 self?.stockHolding = success
                 self?.delegate?.tableViewReload()
             case .failure(let failure):
-                print(failure)
+                self?.delegate?.failure()
             }
         }
         

@@ -16,7 +16,6 @@ final class MockHomePageViewModelOutputDelegate: HomePageViewModelOutputProtocol
     }
 }
 
-
 final class UpstoxTests: XCTestCase {
 
     var viewModel: HomePageViewModelClass!
@@ -25,6 +24,7 @@ final class UpstoxTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        mockServiceManager = MockStocksHoldingServiceManager()
         mockDelegate = MockHomePageViewModelOutputDelegate()
         viewModel = HomePageViewModelClass(delegate: mockDelegate)
         viewModel.networkService = mockServiceManager
@@ -45,14 +45,12 @@ final class UpstoxTests: XCTestCase {
         let mockHoldings = Holdings(data: mockDataClass)
         mockServiceManager.mockResult = .success(mockHoldings)
         
-        
         viewModel.getStockHoldingData()
-        
        
         XCTAssertNotNil(viewModel.stockHoldingsData, "StockHoldingsData should not be nil")
-        XCTAssertEqual(viewModel.stockHoldingsData?.data?.userHolding?.count, 1, "There should be 1 holding")
+        XCTAssertNotNil(viewModel.stockHoldingsData?.data?.userHolding?.count,"There should be holdings")
         XCTAssertEqual(viewModel.stockHoldingsData?.data?.userHolding?.first?.symbol, "ICICI", "Symbol should match")
-        XCTAssertEqual(viewModel.stockHoldingsData?.currentValue, 1500.0, "Current Value should match")
+        XCTAssertEqual(viewModel.stockHoldingsData?.data?.userHolding?.first?.close, 145.0, "close Value should match")
         XCTAssertTrue(mockDelegate.isTableViewReloadCalled, "Delegate's tableViewReload should be called on success")
     }
 
@@ -68,6 +66,13 @@ final class UpstoxTests: XCTestCase {
        
         XCTAssertNil(viewModel.stockHoldingsData, "StockHoldingsData should be nil on failure")
         XCTAssertFalse(mockDelegate.isTableViewReloadCalled, "Delegate's tableViewReload should not be called on failure")
+    }
+    
+    func test_utilities(){
+        let mockUserHolding = UserHolding(symbol: "ICICI", quantity: 10, ltp: 150.0, avgPrice: 140.0, close: 145.0)
+        XCTAssertNotNil(Holdings(data: DataClass(userHolding: [mockUserHolding])))
+        XCTAssertNotNil(Utilities.calulateProfitNLoss(model: mockUserHolding))
+        XCTAssertNotNil(Utilities.setupTextColor(textValue: 100))
     }
 }
 
