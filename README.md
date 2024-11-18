@@ -1,4 +1,4 @@
-# Upstox Project Done
+# Upstox Project
 This repository contains the implementation of the Upstox Assignment, adhering to the provided guidelines and best practices in iOS development. The project demonstrates the use of modern architectural patterns, reusable code, and adherence to swift core principles to ensure a scalable, testable, and maintainable solution.
 
 Features
