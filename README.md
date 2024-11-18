@@ -14,7 +14,7 @@ Adhered to protocol-oriented programming (POP) for flexibility and abstraction.
 
 
 ✅ Testable Code
-Test coverage exceeding 60%.
+Test coverage logic coverage 90% approx.
 Unit tests implemented for critical components (e.g., ViewModels, Services).
 
 
