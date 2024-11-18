@@ -25,11 +25,15 @@ struct Holdings: Codable {
         (currentValue - totalInvestment).rounded(to: 2)
     }
     
+    var totalPNLPercentage: Double {
+        ((totalPNL / totalInvestment) * 100).rounded(to: 2)
+    }
+    
     ///4. Today’s PNL = sum of ((Close - LTP ) * quantity) of all the holdings
     var todayPNL: Double {
         data?.userHolding?.reduce(0) { $0 + ((($1.close) - ($1.ltp)) * Double($1.quantity)) }.rounded(to: 2) ?? 0
     }
-    
+        
     enum CodingKeys: String, CodingKey {
         case data = "data"
     }

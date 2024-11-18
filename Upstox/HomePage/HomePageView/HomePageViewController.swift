@@ -76,7 +76,7 @@ final class HomePageViewController: UIViewController {
         currentValueLabel.text = "₹ \(viewModel?.stockHoldingsData?.currentValue ?? 0)"
         totalInvestmentLabel.text = "₹ \(viewModel?.stockHoldingsData?.totalInvestment ?? 0)"
         totalPnLabel.text = "₹ \(viewModel?.stockHoldingsData?.todayPNL ?? 0)"
-        pnLabel.text = "₹ \(viewModel?.stockHoldingsData?.totalPNL ?? 0)"
+        pnLabel.text = "₹ \(viewModel?.stockHoldingsData?.totalPNL ?? 0) (\(viewModel?.stockHoldingsData?.totalPNLPercentage ?? 0) %)"
         
         currentValueLabel.textColor = Utilities.setupTextColor(textValue: (viewModel?.stockHoldingsData?.currentValue ?? 0))
         
